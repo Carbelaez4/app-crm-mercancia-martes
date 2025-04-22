@@ -1,12 +1,13 @@
-import Login from '../pages/Login'
-import Home from '../Home'
+import Login from '../pages/Login';
+import Home from '../Home';
+import RutaProtegida from '../components/RutaProtegida';
 export let enrutador =[
     {
         path: '/',
-        element: <Login />
+        element: <Login />,
     },
     {
         path: '/home',
-        element: <Home />
+        element: <RutaProtegida componente={<Home />} />,
     }
 ]
