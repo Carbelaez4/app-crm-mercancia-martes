@@ -1,12 +1,28 @@
-import { useState } from 'react'
-import {usuarios} from '../services/database'
+import { useEffect, useState } from 'react'
+
 import './Login.css'
 import { alertaError, alertaRedireccion, generarToken } from '../helpers/funciones'
 import { useNavigate } from 'react-router-dom'
+let apiUsuario ='https://back-json-server-martes.onrender.com/usuarios'
+
 function Login() {
-  const [getUser, setUser]= useState("")
-  const [getPassword, setPassword]= useState("")
-  let redireccion = useNavigate()
+  const [getUser, setUser]= useState("");
+  const [getPassword, setPassword]= useState("");
+  const [usuarios, setUsuarios] = useState([]);
+  let redireccion = useNavigate();
+  function getUsuarios(){
+    fetch(apiUsuario)
+      .then((response)=> response.json())
+      .then((data)=>setUsuarios(data))
+      .catch((error)=>console.log(error));
+  }
+ 
+  useEffect(()=>{
+    getUsuarios
+  },[]);/*recibe dos paarmetrso una funcion flecha, y un arreglo vacio que esta arriba en el useState */
+  
+  
+  
   function buscarUsuario(){
     let usuarioEncontrado = usuarios.find((item)=> getUser == item.usuario && getPassword == item.contrasena)
     return usuarioEncontrado
