@@ -12,6 +12,7 @@ function Login() {
   const [getEmail, setEmail]= useState("");
   const [usuarios, setUsuarios] = useState([]);/*Todos estos son los estados  */
   let redireccion = useNavigate();
+  
   function getUsuarios(){
     fetch(apiUsuario)
       .then((response)=> response.json())
