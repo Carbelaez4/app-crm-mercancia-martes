@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 
 import './Login.css'
-import { alertaError, alertaRedireccion, generarToken } from '../helpers/funciones'
+import { alertaGeneral, alertaRedireccion, generarToken } from '../helpers/funciones'
 import { useNavigate } from 'react-router-dom'
 let apiUsuario ='https://back-json-server-martes.onrender.com/usuarios'
 
@@ -37,7 +37,7 @@ function Login() {
       localStorage.setItem("usuario",JSON.stringify(buscarUsuario()));
       alertaRedireccion(redireccion, "Bienvenido al sistem", '/home')
     } else {
-      alertaError()
+      alertaGeneral("Error","Error de credenciales","error")
     }
 
   }
@@ -45,7 +45,7 @@ function Login() {
   function registrarUsuario(){
     let auth = usuarios.some((item)=>item.correo==getEmail || item.usuario==getUser)
     if(auth){
-      alertaError()
+     alertaGeneral("Error","Ususario ya existe en la base de datos","error");
     }else{
       let nuevoUsuario ={
         nombre: getName,
@@ -57,7 +57,10 @@ function Login() {
       fetch(apiUsuario,{
         method:"POST",
         body: JSON.stringify(nuevoUsuario),
-      })/*le paso un segundo parametro objeto tipo method psot */
+      }).then(()=>{
+        getUsuarios();
+        alertaGeneral("Registro exitoso","ya puede ir a login","info");
+      })    
     }
   }
   

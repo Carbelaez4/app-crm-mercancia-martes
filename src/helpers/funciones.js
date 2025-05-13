@@ -20,12 +20,11 @@ export function alertaRedireccion(redireccion, mensaje, ruta){
     })
 }
 
-export function alertaError(){
+export function alertaGeneral(titulo,mensaje,icono){
     Swal.fire({
-        icon: "error",
-        title: "Oops...",
-        text: "Something went wrong!",
-        footer: '<a href="#">Why do I have this issue?</a>'
+        icon: icono,
+        title: titulo,
+        text: mensaje
       });
 }
 export function generarToken(){
