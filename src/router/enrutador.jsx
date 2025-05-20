@@ -1,9 +1,11 @@
 import Login from '../pages/Login';
 import Home from '../Home';
 import RutaProtegida from '../components/RutaProtegida';
-import { Children } from 'react';
-import Contenido from '../components/Contenido';
-export let enrutador =[
+
+
+import GestionEnvios from '../pages/GestionEnvios';
+import GestionClientes from '../pages/GestionClientes';
+export let enrutador = [
     {
         path: '/',
         element: <Login />,
@@ -11,10 +13,15 @@ export let enrutador =[
     {
         path: '/home/',
         element: <RutaProtegida componente={<Home />} />,
-        children:[
+        children: [
             {
-                path:"envios",
-                element: <Contenido/>,
+                path: "envios",
+                //element: <contenido/>,
+                element: <GestionEnvios />,
+            },
+            {
+                path: "clientes",
+                element: <GestionClientes />,
             },
         ],
     },
